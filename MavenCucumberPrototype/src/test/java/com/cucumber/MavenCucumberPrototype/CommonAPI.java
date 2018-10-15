@@ -102,15 +102,15 @@ public class CommonAPI {
 		BrowserName = BrowserName.toUpperCase();
 		if (BrowserName.equals("CHROME")) {
 			System.setProperty("webdriver.chrome.driver",
-					"C:\\Users\\imran\\workspace7\\FirstCucumberProject\\driver\\chromedriver.exe");
+					"C:\\Users\\imran\\workspace8\\MavenCucumberPrototype\\driver\\chromedriver.exe");
 			driver = new ChromeDriver();
 		} else if (BrowserName.equals("FIREFOX")) {
 			System.setProperty("webdriver.gecko.driver",
-					"C:\\Users\\imran\\workspace7\\FirstCucumberProject\\driver\\geckodriver.exe");
+					"C:\\Users\\imran\\workspace8\\MavenCucumberPrototype\\driver\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		} else if (BrowserName.equals("MICROSOFE EDGE")) {
 			System.setProperty("webdriver.edge.driver",
-					"C:\\Users\\imran\\workspace7\\FirstCucumberProject\\driver\\MicrosoftWebDriver.exe");
+					"C:\\Users\\imran\\workspace8\\MavenCucumberPrototype\\driver\\MicrosoftWebDriver.exe");
 			driver = new EdgeDriver();
 		} else if (BrowserName.equals("IE")) {
 

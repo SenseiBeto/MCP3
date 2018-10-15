@@ -1,7 +1,9 @@
 package com.cucumber.MavenCucumberPrototype;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.os.WindowsUtils;
 
 import cucumber.api.java.After;
@@ -27,12 +29,19 @@ public class StepDefinition_MC extends CommonAPI {
 	public void enter_Many_Data_in_the_calculator_and_click_on_calculate_button(String vhomevalue, String vprincipal,
 			String vinterestRate, String vterm, String vproperty_tax, String vpmi, String vhoi) throws Throwable {
 		scrolldown(driver, 300);
+		driver.findElement(By.name("param[homevalue]")).clear();
 		driver.findElement(By.name("param[homevalue]")).sendKeys(vhomevalue);
+		driver.findElement(By.name("param[principal]")).clear();
 		driver.findElement(By.name("param[principal]")).sendKeys(vprincipal);
+		driver.findElement(By.name("param[interest_rate]")).clear();
 		driver.findElement(By.name("param[interest_rate]")).sendKeys(vinterestRate);
+		driver.findElement(By.name("param[term]")).clear();
 		driver.findElement(By.name("param[term]")).sendKeys(vterm);
+		driver.findElement(By.name("param[property_tax]")).clear();
 		driver.findElement(By.name("param[property_tax]")).sendKeys(vproperty_tax);
+		driver.findElement(By.name("param[pmi]")).clear();
 		driver.findElement(By.name("param[pmi]")).sendKeys(vpmi);
+		driver.findElement(By.name("param[hoi]")).clear();
 		driver.findElement(By.name("param[hoi]")).sendKeys(vhoi);
 		waitTime(2000);
 		driver.findElement(By.name("cal")).click();
@@ -44,6 +53,11 @@ public class StepDefinition_MC extends CommonAPI {
 	// Payment in AUT.
 	@Then("^Check \"([^\"]*)\" with Actual Payment$")
 	public void check_Expected_Payment_with_Actual_Payment(String vExpectedPayment) throws Throwable {
+		//Highlighting the object that will be used for checkpoint		(updated on 1/17/2018)
+				WebElement v=driver.findElement(By.xpath("//*[@id=\"calc\"]/form/section/section[2]/div/div/div[1]/div/div/div[3]/div[2]/div[2]/div[1]/div[1]/h3"));		
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+		        jse.executeScript("arguments[0].style.border='3px solid red'", v);
+		        waitTime(7000);		
 		String vOutput = driver
 				.findElement(By
 						.xpath("//*[@id=\"calc\"]/form/section/section[2]/div/div/div[1]/div/div/div[3]/div[2]/div[2]/div[1]/div[1]/h3"))
@@ -57,7 +71,7 @@ public class StepDefinition_MC extends CommonAPI {
 		}
 	}
 	
-	// This method will always be executed before EACH Cucumber Test Scenario.
+	// This method will always be executed before EACH Iteration of Cucumber Test Scenario.
 		@Before
 		public void CloseBrowsers_BeforeEachTestScenario() {
 			WindowsUtils.killByName("chromedriver.exe");
@@ -67,7 +81,7 @@ public class StepDefinition_MC extends CommonAPI {
 			WindowsUtils.killByName("MicrosoftEdge.exe");
 		}
 
-		// This method will always be executed after EACH Cucumber Test Scenario.
+		// This method will always be executed after EACH Iteration of a Cucumber Test Scenario.
 		@After
 		public void CloseBrowsers_AfterEachTestScenario() {
 			WindowsUtils.killByName("chromedriver.exe");
@@ -75,5 +89,6 @@ public class StepDefinition_MC extends CommonAPI {
 			WindowsUtils.killByName("geckodriver.exe");
 			WindowsUtils.killByName("MicrosoftWebDriver.exe");
 			WindowsUtils.killByName("MicrosoftEdge.exe");
+			System.out.println("after method also works with cucumber");
 		}
 }
